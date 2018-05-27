@@ -50,7 +50,13 @@ d3
     "https://raw.githubusercontent.com/no-stack-dub-sack/testable-projects-fcc/master/src/data/choropleth_map/counties.json"
   )
   .then(function(data) {
-    var geojsonStates = topojson.feature(data, data.objects.states).features;
+    var geojsonStates = topojson.mesh(data, data.objects.states, function(
+      a,
+      b
+    ) {
+      return a !== b;
+    });
+
     var geojsonCounties = topojson.feature(data, data.objects.counties)
       .features;
 
@@ -86,8 +92,8 @@ d3
           return "#ccc";
         }
       })
-      .attr("stroke-width", 0.1)
-      .attr("stroke", "white")
+      //   .attr("stroke-width", 0.1)
+      //   .attr("stroke", "white")
 
       .on("mouseover", function(d) {
         var coordinates = [];
@@ -115,11 +121,15 @@ d3
       });
 
     svg
-      .selectAll(".outline")
-      .data(geojsonStates)
-      .enter()
       .append("path")
+      .datum(
+        topojson.mesh(data, data.objects.states, function(a, b) {
+          return a !== b;
+        })
+      )
       .attr("d", path)
-      .attr("margin", 2)
+      .attr("margin", 1)
+      .attr("stroke", "white")
+      .attr("stroke-linejoin", "round")
       .attr("fill", "none");
   });
