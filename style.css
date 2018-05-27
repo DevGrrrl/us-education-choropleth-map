@@ -1,8 +1,12 @@
+body {
+    font-family: "Roboto", sans-serif;
+}
+
 #chart{
     width: 100%;
     max-width: 1000px;
     background-color: #f7f7f7;
-    margin: 25px auto;
+    margin: 100px auto;
 }
 
 #tooltip {

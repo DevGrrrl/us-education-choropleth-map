@@ -18,7 +18,6 @@ var color = d3
     "#402e6d"
   ]);
 
-
 var path = d3.geoPath();
 
 var education = [];
@@ -96,7 +95,7 @@ d3
 
         d3
           .select("#tooltip")
-          .style("background-color", "#E3B94F")
+          .style("background-color", "rgb(255, 247, 188)")
           .style("opacity", "0.8")
           .style("left", coordinates[0] + 200 + "px")
           .style("top", coordinates[1] - 30 + "px")
@@ -106,11 +105,21 @@ d3
               " " +
               d.properties.value.county +
               " " +
-              d.properties.value.bachelorsOrHigher
+              d.properties.value.bachelorsOrHigher +
+              "%"
           );
       })
 
       .on("mouseout", function() {
         d3.select("#tooltip").style("display", "none");
       });
+
+    svg
+      .selectAll(".outline")
+      .data(geojsonStates)
+      .enter()
+      .append("path")
+      .attr("d", path)
+      .attr("margin", 2)
+      .attr("fill", "none");
   });
