@@ -12,7 +12,8 @@ The map will show the percentage of adults age 25 and older with a bachelor's de
 
 #### Data Sets (provided by Free Code Camp)
 [US Education Data](https://raw.githubusercontent.com/no-stack-dub-sack/testable-projects-fcc/master/src/data/choropleth_map/for_user_education.json)
-[US County Data:](https://raw.githubusercontent.com/no-stack-dub-sack/testable-projects-fcc/master/src/data/choropleth_map/counties.json)
+
+[US County Data](https://raw.githubusercontent.com/no-stack-dub-sack/testable-projects-fcc/master/src/data/choropleth_map/counties.json)
 
 #### Other
 [Data Classification & Choropleth Maps](https://gisgeography.com/choropleth-maps-data-classification/)
