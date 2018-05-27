@@ -59,7 +59,11 @@ d3
       for (var j = 0; j < geojsonCounties.length; j++) {
         var countyId = geojsonCounties[j].id;
         if (countyFips == countyId) {
-          geojsonCounties[j].properties.value = {bachelorsOrHigher:bachelorsOrHigher, state:state, county:county};
+          geojsonCounties[j].properties.value = {
+            bachelorsOrHigher: bachelorsOrHigher,
+            state: state,
+            county: county
+          };
         }
       }
     }
@@ -78,5 +82,30 @@ d3
           return "#ccc";
         }
       })
-      .attr("stroke", "white");
+      .attr("stroke", "white")
+
+      .on("mouseover", function(d) {
+        var coordinates = [];
+        coordinates = d3.mouse(this);
+
+
+        d3
+          .select("#tooltip")
+          .style("background-color", "#E3B94F")
+          .style("opacity", "0.8")
+          .style("left", (coordinates[0] + 200) + "px")
+          .style("top", (coordinates[1] - 30) + "px")
+          .style("display", "block")
+          .html(
+            d.properties.value.state +
+              " " +
+              d.properties.value.county +
+              " " +
+              d.properties.value.bachelorsOrHigher
+          );
+      })
+
+      .on("mouseout", function() {
+        d3.select("#tooltip").style("display", "none");
+      });
   });
