@@ -7,12 +7,17 @@ var chart_height = 700 - margin.top - margin.bottom;
 var color = d3
   .scaleQuantize()
   .range([
-    "rgb(237,248,233)",
-    "rgb(186,228,179)",
-    "rgb(116,196,118)",
-    "rgb(49,163,84)",
-    "rgb(0,109,44)"
+    "#fff7ff",
+    "#e9dbea",
+    "#d2bfd6",
+    "#bba4c3",
+    "#a38bb1",
+    "#8c729f",
+    "#735a8e",
+    "#5a437d",
+    "#402e6d"
   ]);
+
 
 var path = d3.geoPath();
 
@@ -82,19 +87,19 @@ d3
           return "#ccc";
         }
       })
+      .attr("stroke-width", 0.1)
       .attr("stroke", "white")
 
       .on("mouseover", function(d) {
         var coordinates = [];
         coordinates = d3.mouse(this);
 
-
         d3
           .select("#tooltip")
           .style("background-color", "#E3B94F")
           .style("opacity", "0.8")
-          .style("left", (coordinates[0] + 200) + "px")
-          .style("top", (coordinates[1] - 30) + "px")
+          .style("left", coordinates[0] + 200 + "px")
+          .style("top", coordinates[1] - 30 + "px")
           .style("display", "block")
           .html(
             d.properties.value.state +
