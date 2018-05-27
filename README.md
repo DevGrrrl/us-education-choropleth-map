@@ -17,7 +17,6 @@ The map will show the percentage of adults age 25 and older with a bachelor's de
 
 #### Other
 [Data Classification & Choropleth Maps](https://gisgeography.com/choropleth-maps-data-classification/)
-(https://github.com/topojson/topojson)
 
 [TopoJSON extension](https://github.com/topojson/topojson)
 
