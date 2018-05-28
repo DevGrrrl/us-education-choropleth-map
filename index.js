@@ -29,7 +29,7 @@ function scale(scaleFactor, width, height) {
   });
 }
 
-var path = d3.geoPath().projection(scale(0.2, chart_width, chart_height));
+var path = d3.geoPath().projection(scale(0.8, chart_width, chart_height));
 
 var education = [];
 
