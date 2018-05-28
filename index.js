@@ -18,7 +18,18 @@ var color = d3
     "#402e6d"
   ]);
 
-var path = d3.geoPath();
+function scale(scaleFactor, width, height) {
+  return d3.geoTransform({
+    point: function(x, y) {
+      this.stream.point(
+        (x - width / 2) * scaleFactor + width / 2,
+        (y - height / 2) * scaleFactor + height / 2
+      );
+    }
+  });
+}
+
+var path = d3.geoPath().projection(scale(0.2, chart_width, chart_height));
 
 var education = [];
 
