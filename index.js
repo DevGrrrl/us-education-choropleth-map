@@ -5,7 +5,7 @@ var chart_width = 1000 - margin.left - margin.right;
 var chart_height = 700 - margin.top - margin.bottom;
 
 var color = d3
-  .scaleQuantize()
+  .scaleThreshold()
   .range([
     "#fff7ff",
     "#e9dbea",
@@ -17,6 +17,8 @@ var color = d3
     "#5a437d",
     "#402e6d"
   ]);
+
+//function to scale map
 
 function scale(scaleFactor, width, height) {
   return d3.geoTransform({
@@ -44,15 +46,15 @@ d3
     "https://raw.githubusercontent.com/no-stack-dub-sack/testable-projects-fcc/master/src/data/choropleth_map/for_user_education.json"
   )
   .then(function(data) {
-    color.domain([
-      d3.min(data, function(d) {
-        return d.bachelorsOrHigher;
-      }),
-      d3.max(data, function(d) {
-        return d.bachelorsOrHigher;
-      })
-    ]);
-
+    var min = d3.min(data, function(d) {
+      return d.bachelorsOrHigher;
+    });
+    var max = d3.max(data, function(d) {
+      return d.bachelorsOrHigher;
+    });
+    //last value of d3.range (below) is the step value and bin size.
+    //anything less than min will be the first colour in d3.range, and anything above or equal to max will be the last color in d3.range
+    color.domain(d3.range(min, max, (max - min) / 8));
     education.push(data);
   });
 
@@ -88,7 +90,6 @@ d3
         }
       }
     }
-
     svg
       .selectAll("path")
       .data(geojsonCounties)
