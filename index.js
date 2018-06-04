@@ -4,19 +4,7 @@ var margin = { top: 10, right: 10, bottom: 10, left: 10 };
 var chart_width = 1000 - margin.left - margin.right;
 var chart_height = 700 - margin.top - margin.bottom;
 
-var color = d3
-  .scaleThreshold()
-  .range([
-    "#fff7ff",
-    "#e9dbea",
-    "#d2bfd6",
-    "#bba4c3",
-    "#a38bb1",
-    "#8c729f",
-    "#735a8e",
-    "#5a437d",
-    "#402e6d"
-  ]);
+var color = d3.scaleThreshold().range(d3.schemeGnBu[9]);
 
 //function to scale map
 
