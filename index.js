@@ -29,6 +29,8 @@ var svg = d3
   .attr("width", chart_width)
   .attr("height", chart_height);
 
+//fetch education data and push into education array, set color domain with min and max values of education data
+
 d3
   .json(
     "https://raw.githubusercontent.com/no-stack-dub-sack/testable-projects-fcc/master/src/data/choropleth_map/for_user_education.json"
@@ -45,6 +47,8 @@ d3
     color.domain(d3.range(min, max, (max - min) / 8));
     education.push(data);
   });
+
+//get state/coutnties data to draw map
 
 d3
   .json(
@@ -92,8 +96,8 @@ d3
           return "#ccc";
         }
       })
-      //   .attr("stroke-width", 0.1)
-      //   .attr("stroke", "white")
+
+      //create tooltips
 
       .on("mouseover", function(d) {
         var coordinates = [];
@@ -120,6 +124,8 @@ d3
         d3.select("#tooltip").style("display", "none");
       });
 
+    //state boudary stroke
+
     svg
       .append("path")
       .datum(
@@ -132,4 +138,59 @@ d3
       .attr("stroke", "white")
       .attr("stroke-linejoin", "round")
       .attr("fill", "none");
+
+    //legend
+
+    //legend colors
+
+    var legend = svg
+      .selectAll("rect")
+      .data(d3.schemeGnBu[8])
+      .enter()
+      .append("rect")
+      .attr("y", 55)
+      .attr("x", function(d, i) {
+        return 750 + i * 25;
+      })
+      .attr("width", 25)
+      .attr("height", 10)
+      .style("fill", function(d) {
+        return d;
+      });
+
+    //legend axis
+
+    var min = d3.min(education[0], function(d) {
+      return d.bachelorsOrHigher;
+    });
+    var max = d3.max(education[0], function(d) {
+      return d.bachelorsOrHigher;
+    });
+
+    var axisValues = d3.range(
+      Math.round(min),
+      Math.round(max),
+      (Math.round(max) - Math.round(min)) / 8
+    );
+
+    var legendScale = d3
+      .scaleLinear()
+      .domain([Math.round(min), Math.round(max)])
+      .range([750, 950]);
+
+    var legendAxis = d3
+      .axisBottom()
+      .scale(legendScale)
+      .ticks(8)
+      .tickValues(axisValues)
+      .tickFormat(function(element) {
+        return element + "%";
+      })
+      .tickSize(15)
+
+    svg
+      .append("g")
+      .attr("class", "axis")
+      .attr("transform", "translate(0, 55)")
+      .call(legendAxis);
   });
