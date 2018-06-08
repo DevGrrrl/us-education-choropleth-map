@@ -22,5 +22,5 @@ The map will show the percentage of adults age 25 and older with a bachelor's de
 
 Screenshot of progress so far: 
 
-![choropleth](https://user-images.githubusercontent.com/22034073/40590239-768bb626-61f3-11e8-9dbd-8b88daf652b1.gif)
+![choropleth](https://user-images.githubusercontent.com/22034073/41162985-5d8a7bb8-6b2f-11e8-9b66-e4f102e42d01.gif)
 
